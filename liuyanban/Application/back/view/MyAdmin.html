@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+  .a{margin-left:10px;float:left}
+  div{float:left}
+  #bottom{clear:both}
+  a:link{text-decoration:none;background-color:#ff0000;color:#ffffff}
+   a:visited{text-decoration:none;background-color:#0000ff;color:#ffffff}
+   a:hover{text-decoration:none;background-color:#000000;color:#ffffff}
+   a:active{text-decoration:none;background-color:#00ff00;color:#ffffff}
+  </style>
+ </head>
+ <body>
+ <div>
+  <div id="head">
+   <div class="a"><a href="?p=back&c=Admin&a=Adminliuyan">留言管理</a></div>
+   <div class="a"><a href="">系统设置</a></div>
+   <div class="a"><a href="?p=back&c=Admin&a=Adminxiugai">修改密码</a></div>
+   <div class="a"><a href="?p=back&c=Admin&a=Login" onclick='return queren()'>退出管理</a></div>
+  </div>
+  <div id="bottom">
+  <p></p>
+  </div>
+ </div>
+ </body>
+</html>
+<script>
+     function queren(){
+	  return window.confirm("你真的要退出吗?");
+	 }
+
+</script>

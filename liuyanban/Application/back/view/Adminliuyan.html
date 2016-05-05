@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script type="text/javascript">
+  function delete(){
+  return window.confirm("你真的要删除吗?");
+  }
+  </script>
+  <style type="text/css">
+  .a{margin-left:10px;float:left}
+  div{float:left;}
+  #count{float:left;clear:both}
+  #bottom{clear:both}
+  a:link{text-decoration:none;background-color:#ff0000;color:#ffffff}
+   a:visited{text-decoration:none;background-color:#0000ff;color:#ffffff}
+   a:hover{text-decoration:none;background-color:#000000;color:#ffffff}
+   a:active{text-decoration:none;background-color:#00ff00;color:#ffffff}
+  </style>
+ </head>
+ <body>
+ <div>
+  <div id="head">
+   <div class="a"><a href="?p=back&c=Admin&a=Adminliuyan">留言管理</a></div>
+   <div class="a"><a href="">系统设置</a></div>
+   <div class="a"><a href="?p=back&c=Admin&a=Adminxiugai">修改密码</a></div>
+   <div class="a"><a href="?p=back&c=Admin&a=ShowLogin" onclick='return queren()'>退出管理</a></div>
+  </div>
+  <div id="bottom">
+   <table border=1>
+   <tr>
+   <th>留言序号</th>
+   <th>留言者</th>
+   <th>留言标题</th>
+   <th>留言内容</th>
+   <th>内容回复</th>
+   <th>留言时间</th>
+   <th>管理操作</th>
+   </tr>
+
+ <?php foreach($arrs as $key=>$rec) {
+       
+
+ ?>
+ <tr>
+ <td><?php echo $rec['id'];?></td>
+ <td><?php echo $rec['name'];?></td>
+ <td><?php echo $rec['zhuti'];?></td>
+ <td><?php echo $rec['text'];?></td>
+ <td>
+ <?php 
+ if(!empty($arrs_back)){
+ foreach($arrs_back as $key=>$rec_back)
+    {       
+     if($rec_back['liuyan_id']==$rec['id']){ echo $rec_back['huifu_text']."<br />";} 
+}
+}
+ ?>
+ </td>
+ <td><?php echo $rec['liuyan_time'];?></td>
+ <td>
+	<a href="?p=back&c=Admin&a=Deleteliuyan&liuyan_id=<?php echo $rec['id']; ?>" onclick='return delete()'>删除留言</a>
+	<a href="?p=back&c=Admin&a=Deletehuifu&liuyan_id=<?php echo $rec['id']; ?>" onclick='return delete()'>删除回复</a>
+	
+ </td>
+ </tr>
+ <?php
+   
+  }
+ ?>
+  </table>
+ 
+  </div>
+  <div id="count">
+  <br/>
+ 一共有<?php echo $date; ?>条留言
+
+ </div>
+ </div>
+ 
+ </body>
+</html>
+<script>
+     function queren(){
+	  return window.confirm("你真的要退出吗?");
+	 }
+     
+</script>

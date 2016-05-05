@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script type="text/javascript">
+            var i = 4;
+            var intervalid;
+            intervalid = setInterval("count_down()", 1000);
+            function count_down()
+            {
+              if (i == 0)
+                {
+                 
+                clearInterval(intervalid);
+}
+document.getElementById("p").innerHTML = i;
+i--;
+}
+</script>
+<style type="text/css">
+#p{font-size:32px;color:red}
+
+</style>
+ </head>
+ <body>
+         <p>操作数据成功!</p>
+		  <a href='?p=back&c=Admin&a=Adminliuyan'>返回</a>
+		  <br /><p>页面将在秒<big id='p'></big>之后自动跳转!</p>
+		  <?php header("refresh: 5; url=?p=back&c=Admin&a=Adminliuyan");?>
+		  
+
+ </body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script type="text/javascript">
+  function show_back(id){
+	  var a=document.getElementById(id);
+	  var b=document.getElementById("input"+id);
+	  if(a.style.display=="block")
+	  {
+	    a.style.display="none";
+		b.value="回复";
+	  }
+	  else
+	  {
+	  a.style.display="block";
+	  
+	   b.value="收起";
+	 
+	  }
+	    
+  }
+  </script>
+  <style>
+  body{background-color:#99ffff;}
+  #header{
+         
+		  height:125px;width:650px
+  }
+  #left{background-color:#ffffcc;width:500px;height:425px;
+        float:left;position:absolute;top:160px;
+        border-radius:25px;/*设置圆角*/
+		box-shadow: 10px 10px 5px #888888;}/*设置阴影*/
+  #right{
+        height:600px;
+        width:620px;
+        float:right;position:
+        absolute;top:25px;right:50px;
+        box-shadow: 10px 10px 5px #888888;/*设置阴影*/
+		overflow:auto;/*滚动条*/
+		
+
+		
+	    }
+  #form{position:absolute;left:40px}
+  #text{position:absolute;left:50px}
+  #submit{width:150px;height:35px;background-color:#ffff99;text-align:center;}
+  td{height:40px}
+  #tijiao{position:absolute;left:80px;top:260px;}
+  .text{height:25px}
+  #right_head{
+      width:600px;height:50px;border:1px solid #ffcc66;
+      background-color:#66ff99;text-indent:12px;
+      border-top-left-radius:20px;
+	  border-top-right-radius:20px;
+	  margin-top:8px
+	  }
+  #center{width:600px;height:100px;border:1px solid #ffcc66;text-indent:32px;font-size:20px}
+  .huifu{width:600px;height:50px;border:1px solid #ffcc66;}
+  #name{float:left}
+  #time{float:right}
+  #area{position:absolute;left:70px;top:150px;float:left}
+  #back{float:bottom;float:right;margin-right:8px}
+  #huifu_div{margin-top:8px;position:relative;left:50px;float:left}
+  #showback{border:1px solid #ffcc66;}
+  #showback_text{text-indent:12px;color:#669900;line-height:30px}
+  #huifu_time{text-indent:30px;}
+  #tip{font-size:12px;width:60px;position:absolute;top:170px}
+  #fanhui{height:32px;width:32px;position:absolute;top:550px;right:0px;margin-right:8px;}/*返回顶部*/
+  a{text-decoration:none}
+  </style>
+ </head>
+ <body>
+ <!-----留言部分----->
+ <div>
+ <div id="header"><img src="tu3.jpg" height="145px" width="550px"></div>
+   <div id="left">
+       <div id="head">
+          <h1>留言纸条</h1><a href="?p=back&c=Admin&a=ShowLogin">后台管理</a>|
+		  <a href="?p=back&c=Admin&a=AddUser">注册账号</a>
+	   </div>
+       <div id="form">
+	       <form action="?p=front&c=Liuyanban&a=Addliuyan" method="post">
+	       <table>
+	          <tr><td align="right"><h5>留言人：</h5></td><td ><input class="text" type="text" name="name"  size="20"></td></tr>
+	          <tr><td ><h5>留言主题：</h5></td><td ><input class="text" type="text" name="zhuti" size="20"></td></tr> 
+              <tr><td><h5>留言内容：</h5><div id="tip">(内容不超过50字)</div></td></tr>
+           </table>
+		  <div id="area"> 
+		    <textarea rows="5" cols="40" name="text">
+            </textarea>
+		   </div>
+           <div id="tijiao">
+			   <input type="submit" value="提交留言" id="submit">
+		   </div>
+	     </form>
+	   </div>
+	   
+	</div>
+	
+    <div id="right">
+	<a id="top"></a>
+	<!---回复部分---->
+	
+	<?php if($arrs==false){
+	    echo "<h1>没有留言<h1>";
+	}
+	else
+	{
+	?>
+	 <?php
+     foreach($arrs as $key=>$rec){
+     ?>
+       <div id="right_head">
+	     <p>
+	       <div id="name"><?php echo $rec['name']."的留言";?>
+	       </div>
+	       <div id="time"><?php echo $rec['liuyan_time'];?>
+	       </div>
+		 </p>
+	   </div>
+	   <div id="center">
+	     <p>
+		   <?php echo $rec['text']; ?>
+		 </p>
+		 <div id="back">
+		    <input id="input<?php echo $rec['id'];?>" class="text" type="submit" value="回复" onclick="show_back(<?php echo $rec['id'];?>)">
+	     </div>
+	   </div>
+       <div id="showback">
+	   
+	 
+		    <?php
+			 if(!empty($arrs_back)){
+			 $i=1;
+			 foreach($arrs_back as $key=>$rec_back){
+			?>
+              <div id="showback_text">
+			  
+			     <?php  if($rec_back['liuyan_id']==$rec['id']){ echo "<a href='' >".$i."楼</a>"."回复"."<a href=''>".$rec['name']."</a>：".$rec_back['huifu_text'];$i=$i+1;};?>
+			  </div>
+			  <div id="huifu_time">
+                 <?php  if($rec_back['liuyan_id']==$rec['id']){ echo $rec_back['huifu_time'];} ?>
+			  </div>
+			<?php
+			
+			  }
+			}
+			?>
+			
+		  </div> 
+	   <div class="huifu" id="<?php echo $rec['id'];?>" style="display:none;"> 
+	     <form action='?id=<?php echo $rec['id'];?>&p=front&c=Liuyanban&a=Addhuifu' method="post">
+		   <div id="huifu_div">
+	         <input class="text" type="text" name="huifu_text" size="60" >
+	         <input class="text" type="submit" value="回复" >
+		   </div>
+	     </form>
+	  </div>
+	 <?php
+      }
+	  
+      ?>
+	  <?php
+      }
+      ?>
+	  
+	</div>
+	<div id="fanhui"><a href="#top" target="_self"><img src="tu1.png" /></a></div>
+ </div>
+ </body>
+</html>
+
+
